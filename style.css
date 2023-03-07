@@ -1,0 +1,7 @@
+* {
+    font-family: 'Press Start 2P', cursive;
+}
+
+#board {
+    border: 2px solid black;
+}
