@@ -8,17 +8,14 @@ ctx.scale(BLOCK_SIZE, BLOCK_SIZE) //the scale of 1 will now be scaled to a block
 
 let requestId
 
+//Board initilization
+let winner = 0
 let board = new Board(ctx)
 // board.reset()
+board.addNPiecesOfEach(2)
+// board.spawnPiece(1)
+board.drawBoard()
 
-//rand spawn coordinates for now
-let rock1 = new Piece(ctx, Math.floor(Math.random() * (19 + 1)), Math.floor(Math.random() * (19 + 1)), 1)
-let paper1 = new Piece(ctx, Math.floor(Math.random() * (19 + 1)), Math.floor(Math.random() * (19 + 1)), 2)
-
-
-
-rock1.draw()
-paper1.draw()
 
 
 function play() { //called on start button in html
@@ -40,19 +37,25 @@ function animate(now = 0) {
         //     gameOver()
         //     return
         // }
-        rock1.move()
-        paper1.move()
+        board.move()
+        if(board.doWeHaveWinner() && winner===0){
+            winner = board.returnWinner()
+            displayWinner()
+        }
     }
 
     //redraw the canvas
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
-    // board.draw()
-    rock1.draw()
-    paper1.draw()
+    board.drawBoard()
     requestId = requestAnimationFrame(animate) //not sure what it does but it take himself as a callback??
 }
 
 function resetGame() {
     board.reset()
     time = { start: 0, elapsed: 0}
+}
+
+function displayWinner(){
+    let p = document.getElementById("winner")
+    p.innerText = `Congratulations, ${winner} is the winner`
 }
