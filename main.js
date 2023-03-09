@@ -9,20 +9,24 @@ let plusOneScissorsBtn = document.querySelector('.spawn-scissors-button')
 plusOneRockBtn.addEventListener('click', (e) => {
     board.spawnPiece(1)
     board.drawBoard()
+    removeWinner()
 })
 plusOnePaperBtn.addEventListener('click', (e) => {
     board.spawnPiece(2)
     board.drawBoard()
+    removeWinner()
 })
 plusOneScissorsBtn.addEventListener('click', (e) => {
     board.spawnPiece(3)
     board.drawBoard()
+    removeWinner()
 })
 
 let plus10OfEachBtn = document.querySelector('.spawn-10-each-button')
 plus10OfEachBtn.addEventListener('click', (e) => {
     board.addNPiecesOfEach(10)
     board.drawBoard()
+    removeWinner()
 })
 
 let resetBtn = document.querySelector('.reset-button')
@@ -96,8 +100,11 @@ function resetGame() { //clears board, winner and winner p
     pause()
     time = { start: 0, elapsed: 0}
 
-    winner = null
+    removeWinner()
+}
 
+function removeWinner(){
+    winner = null
     let p = document.querySelector(".winner-p")
     p.innerHTML = ""
 }
