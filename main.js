@@ -11,16 +11,17 @@ let requestId
 //Board initilization
 let winner = 0
 let board = new Board(ctx)
-// board.reset()
-board.addNPiecesOfEach(2)
+board.addNPiecesOfEach(10)
 // board.spawnPiece(1)
 board.drawBoard()
 
+//TODO : personalization, sprites, sprites are mirrored if they go left/right, change the winner p to reflect the team winning
+//TODO : pause button?
+//TODO Mutating pieces ? a rock becomes a paper, etc
 
 
 function play() { //called on start button in html
     resetGame()
-    //console.table(board.grid)
     time.start = performance.now() //reset time
     if (requestId) { //cancel animation from the old game
         cancelAnimationFrame(requestId)
@@ -51,7 +52,7 @@ function animate(now = 0) {
 }
 
 function resetGame() {
-    board.reset()
+    // board.reset()
     time = { start: 0, elapsed: 0}
 }
 

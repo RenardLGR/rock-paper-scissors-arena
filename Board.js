@@ -5,28 +5,18 @@ class Board{
         this.pieces = [] //Array of Piece
     }
 
-    reset() {
+    reset() { //useless for now
         this.grid = this.getEmptyGrid()
         // this.pieces = []
     }
 
-    move(){
+    move(){ //make a movement, check if pieces need to change type, redraw
         this.pieces.forEach(p => p.move())
         this.changeType()
         this.drawBoard()
     }
 
-    drawBoard(){ //draw a rectangle with its color
-        // this.grid.forEach((row, y) => {
-        //     row.forEach((value, x) => {
-        //         if(value > 0){
-        //             let randX = Math.floor(Math.random() * (n + 1));
-        //             let randY = Math.floor(Math.random() * (n + 1));
-        //             this.ctx.fillStyle = 'red'
-        //             this.ctx.fillRect(x,x,1,1)
-        //         }
-        //     })
-        // })
+    drawBoard(){ //draw sprites
         this.pieces.forEach(p => p.draw())
     }
 
@@ -37,26 +27,29 @@ class Board{
                 if(piece1.type===1 && piece2.type===3 && this.areSuperposed(piece1, piece2)){
                     //rock + scissors superposition => scissors becomes rock
                     piece2.type = 1
-                    piece2.attributeColor()
+                    // piece2.attributeColor()
+                    piece2.attributeImgsrc()
                 }
 
                 if(piece1.type===2 && piece2.type===1 && this.areSuperposed(piece1, piece2)){
                     //paper + rock superposition => rock becomes paper
                     piece2.type = 2
-                    piece2.attributeColor()
+                    // piece2.attributeColor()
+                    piece2.attributeImgsrc()
                 }
 
                 if(piece1.type===3 && piece2.type===2 && this.areSuperposed(piece1, piece2)){
                     //scissors + paper superposition => paper becomes scissors
                     piece2.type = 3
-                    piece2.attributeColor()
+                    // piece2.attributeColor()
+                    piece2.attributeImgsrc()
                 }
             })
         })
 
     }
 
-    areSuperposed(piece1, piece2){
+    areSuperposed(piece1, piece2){ //check if piece1 and piece2 are superposed
         let res = false
         if(piece2.x<=piece1.x+1 && piece2.x>=piece1.x && piece2.y<=piece1.y+1 && piece2.y>=piece1.y){
             res = true
@@ -78,7 +71,7 @@ class Board{
         }
     }
 
-    spawnPiece(id){
+    spawnPiece(id){ //spawn piece //1 is rock, 2 is paper, 3 is scissors
         let newP = new Piece(this.ctx, getRandCoord(), getRandCoord(), id)
         this.pieces.push(newP)
     }
@@ -91,7 +84,7 @@ class Board{
         }
     }
 
-    getEmptyGrid() {
+    getEmptyGrid() { //useless for now
         return Array.from(
             { length: ROWS }, () => Array(COLS).fill(0)
         )

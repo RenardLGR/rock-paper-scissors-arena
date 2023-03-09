@@ -1,5 +1,5 @@
-const COLS = 20;
-const ROWS = 20;
+const COLS = 30;
+const ROWS = 30;
 const BLOCK_SIZE = 30; //in px
 
 const period = 15 //time in ms between 2 movements

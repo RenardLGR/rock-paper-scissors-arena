@@ -4,18 +4,26 @@ class Piece {
         this.color = 'purple'
         this.type = type //1 is rock, 2 is paper, 3 is scissors
         //Starting position, origin is top left corner, increasing x will go left, increasing y will go bottom
+        this.imgsrc
         this.x = x
         this.y = y
         this.maxX = COLS - 1
         this.maxY = ROWS - 1
         this.direction = Math.random() * 2 * Math.PI
         // this.direction = 0
-        this.attributeColor()
+        // this.attributeColor()
+        this.attributeImgsrc()
     }
 
     draw() { //draw our piece
-        ctx.fillStyle = this.color;
-        ctx.fillRect(this.x, this.y, 1, 1);
+        // ctx.fillStyle = this.color;
+        // ctx.fillRect(this.x, this.y, 1, 1);
+        var img = new Image();
+        img.src = this.imgsrc
+        //Img appears one page load
+        img.onload = () => ctx.drawImage(img, this.x, this.y, 1, 1);
+        //Img is redrawn every steps
+        ctx.drawImage(img, this.x, this.y, 1, 1);
     }
 
     move() {
@@ -96,6 +104,7 @@ class Piece {
     }
 
     attributeColor() { //changed the default color to a color corresponding to its id
+        //As we moved to img as sprites, obsolete
         switch (this.type) {
             case 1:
                 this.color = 'red'
@@ -107,6 +116,25 @@ class Piece {
 
             case 3:
                 this.color = 'blue'
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    attributeImgsrc() { //changed the default src to a src corresponding to its id
+        switch (this.type) {
+            case 1:
+                this.imgsrc = "./img/rock.svg"
+                break;
+
+            case 2:
+                this.imgsrc = "./img/paper.svg"
+                break;
+
+            case 3:
+                this.imgsrc = "./img/scissors.svg"
                 break;
 
             default:
