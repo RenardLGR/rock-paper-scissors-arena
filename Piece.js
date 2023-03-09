@@ -10,7 +10,7 @@ class Piece {
         this.maxX = COLS - 1
         this.maxY = ROWS - 1
         this.direction = Math.random() * 2 * Math.PI
-        // this.direction = 0
+        // Using a direction in X and a diretion in Y and simply dirX = -dirX when hitting a wall would have probably made things easier
         // this.attributeColor()
         this.attributeImgsrc()
     }

@@ -1,13 +1,11 @@
 class Board{
     constructor(ctx){
         this.ctx = ctx
-        this.grid
         this.pieces = [] //Array of Piece
     }
 
-    reset() { //useless for now
-        this.grid = this.getEmptyGrid()
-        // this.pieces = []
+    reset() {
+        this.pieces = []
     }
 
     move(){ //make a movement, check if pieces need to change type, redraw
@@ -61,7 +59,14 @@ class Board{
         return res
     }
 
+    hasPieces(){ //return a Boolean if the board has or not any pieces
+        return this.pieces.length > 0
+    }
+
     doWeHaveWinner(){ //check if every piece is the same type
+        if(this.pieces.length === 0){
+            return false
+        }
         return this.pieces.every(p => p.type === this.pieces[0].type)
     }
 
@@ -72,7 +77,7 @@ class Board{
     }
 
     spawnPiece(id){ //spawn piece //1 is rock, 2 is paper, 3 is scissors
-        let newP = new Piece(this.ctx, getRandCoord(), getRandCoord(), id)
+        let newP = new Piece(this.ctx, getRandCoord(COLS), getRandCoord(ROWS), id)
         this.pieces.push(newP)
     }
 
