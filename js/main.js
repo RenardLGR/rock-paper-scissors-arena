@@ -41,6 +41,7 @@ ctx.scale(BLOCK_SIZE, BLOCK_SIZE) //the scale of 1 will now be scaled to a block
 let requestId
 let time
 let isPaused = true
+let moves = 1 //this value will range between 0 and skipRedraw+, each time it is moves>=skipRedraw, a redraw will trigger
 
 //Board initilization
 let winner = null
@@ -52,6 +53,7 @@ let board = new Board(ctx)
 //TODO : sprites are mirrored if they go left/right
 //TODO : pause button?
 //TODO Mutating pieces ? a rock becomes a paper, etc
+//TODO Chart.js?
 
 
 //Functions
@@ -85,9 +87,20 @@ function animate(now = 0) {
     }
 
     //redraw the canvas
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
-    board.drawBoard()
-    requestId = requestAnimationFrame(animate) //not sure what it does but it take himself as a callback??
+    if(moves >= skipRedraw){
+        moves = 0
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+        board.drawBoard()
+    }
+
+    //skipping when nPieces is high
+    let nPieces = board.howManyPieces()
+    if(nPieces < 100){ //redraw every moves if nPieces is smaller than 100
+        moves++
+    }else{ //skip some redraw if there are too many pieces
+        moves += 100/(nPieces*1.05)
+    }
+    requestId = requestAnimationFrame(animate) //not sure what it does but it make the animation work
 }
 
 function pause(){
@@ -112,7 +125,8 @@ function removeWinner(){
 function displayWinner(){
     let p = document.querySelector(".winner-p")
     let win = whoIsTheWinner()
-    p.innerHTML = `Congratulations, <span class="winner-span">${win}</span> wins`
+    let legend = generateLegend()
+    p.innerHTML = `<span class="winner-span">${win}</span> wins. <span class="winner-span">${legend}</span>.`
 }
 
 function whoIsTheWinner(){
@@ -127,6 +141,28 @@ function whoIsTheWinner(){
 
         case 3:
             return 'Scissors'
+            break;
+
+        default:
+            return
+            break;
+    }
+}
+
+function generateLegend(){
+    switch (winner) {
+        case 1:
+            return 'Rocket science'
+            // 'Get recked'
+            break;
+
+        case 2:
+            return 'Fly high'
+            break;
+
+        case 3:
+            return 'Cutting edge'
+            // 'Edgy'
             break;
 
         default:

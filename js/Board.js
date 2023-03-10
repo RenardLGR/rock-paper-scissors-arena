@@ -8,10 +8,10 @@ class Board{
         this.pieces = []
     }
 
-    move(){ //make a movement, check if pieces need to change type, redraw
+    move(){ //make a movement, check if pieces need to change typeredraw
         this.pieces.forEach(p => p.move())
         this.changeType()
-        this.drawBoard()
+        //this.drawBoard()
     }
 
     drawBoard(){ //draw sprites
@@ -61,6 +61,10 @@ class Board{
 
     hasPieces(){ //return a Boolean if the board has or not any pieces
         return this.pieces.length > 0
+    }
+
+    howManyPieces(){
+        return this.pieces.length
     }
 
     doWeHaveWinner(){ //check if every piece is the same type
