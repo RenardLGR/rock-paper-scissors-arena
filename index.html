@@ -23,18 +23,79 @@
             <button class="spawn-paper-button settings-buttons"> +1 Paper</button>
             <button class="spawn-scissors-button settings-buttons"> +1 Scissors</button>
             <button class="spawn-10-each-button settings-buttons"> +10 of each</button>
-            <button onclick="play()" class="play-button settings-buttons">Play</button>
+            <button onclick="play()" class="play-button settings-buttons">Start</button>
             <button class="reset-button settings-buttons">Reset</button>
         </div>
     </section>
 
-    <section class="winner-section">
+    <section class="winner-section hidden">
         <p class="winner-p"></p>
     </section>
+
+        <!-- Chart section -->
+        <section class="chart-section">
+
+            <!-- Bar chart -->
+            <section class="all-bars-chart-section">
+    
+                <!-- Rock Bar -->
+                <section class="bar-chart-section bar-rock">
+                    <div class="bar-chart-legend-div bar-rock">
+                        <span class="bar-chart-legend-span bar-rock">Rock</span>
+                    </div>
+                    <div class="bar-chart-div bar-rock">
+                        <!-- This bar will shrink/grow -->
+                        <div class="bar-chart-bar bar-rock"></div>
+                    </div>
+                    <div class="bar-chart-total-div bar-rock">
+                        <span class="bar-chart-total-span bar-rock">0</span>
+                    </div>
+                </section>
+    
+                <!-- Paper Bar -->
+                <section class="bar-chart-section bar-paper">
+                    <div class="bar-chart-legend-div bar-paper">
+                        <span class="bar-chart-legend-span bar-paper">Paper</span>
+                    </div>
+                    <div class="bar-chart-div bar-paper">
+                        <!-- This bar will shrink/grow -->
+                        <div class="bar-chart-bar bar-paper"></div>
+                    </div>
+                    <div class="bar-chart-total-div bar-paper">
+                        <span class="bar-chart-total-span bar-paper">0</span>
+                    </div>
+                </section>
+    
+                <!-- Scissors Bar -->
+                <section class="bar-chart-section bar-scissors">
+                    <div class="bar-chart-legend-div bar-scissors">
+                        <span class="bar-chart-legend-span bar-scissors">Scissors</span>
+                    </div>
+                    <div class="bar-chart-div bar-scissors">
+                        <!-- This bar will shrink/grow -->
+                        <div class="bar-chart-bar bar-scissors"></div>
+                    </div>
+                    <div class="bar-chart-total-div bar-scissors">
+                        <span class="bar-chart-total-span bar-scissors">0</span>
+                    </div>
+                </section>
+            </section>
+    
+            <!-- All type total -->
+            <section class="all-type-total-section">
+                <div class="all-type-total-div">
+                    <span class="all-type-total-span">Total:</span>
+                </div>
+                <div class="all-type-total-value-div">
+                    <span class="all-type-total-value-span">0</span>
+                </div>
+            </section>
+        </section>
 
     <script type="text/javascript" src="./js/constants.js"></script>
     <script type="text/javascript" src="./js/Board.js"></script>
     <script type="text/javascript" src="./js/Piece.js"></script>
+    <script type="text/javascript" src="./js/Stat.js"></script>
     <script type="text/javascript" src="./js/main.js"></script>
 </body>
 

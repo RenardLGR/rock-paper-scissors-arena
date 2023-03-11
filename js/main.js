@@ -54,6 +54,7 @@ let board = new Board(ctx)
 //TODO : pause button?
 //TODO Mutating pieces ? a rock becomes a paper, etc
 //TODO Chart.js?
+//TODO delete on mouse click?
 
 
 //Functions
@@ -62,7 +63,7 @@ function play() { //called on start button in html
     if(board.hasPieces() === false){ //do nothing if board is empty
         return
     }
-    if(isPaused){
+    if(isPaused){ //unpause if it was paused
         isPaused = !isPaused
     }
     time = { start: 0, elapsed: 0}
@@ -80,6 +81,7 @@ function animate(now = 0) {
         time.start = now
         board.move()
 
+        //check for winner
         if(board.doWeHaveWinner() && winner===null){
             winner = board.returnWinner()
             displayWinner()
@@ -116,6 +118,8 @@ function resetGame() { //clears board, winner and winner p
     removeWinner()
 }
 
+
+// DOM manipulation
 function removeWinner(){
     winner = null
     let p = document.querySelector(".winner-p")

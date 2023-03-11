@@ -2,15 +2,19 @@ class Board{
     constructor(ctx){
         this.ctx = ctx
         this.pieces = [] //Array of Piece
+        this.stat
     }
 
     reset() {
         this.pieces = []
     }
 
-    move(){ //make a movement, check if pieces need to change typeredraw
+    move(){ //make a movement, check if pieces need to change type, update stat
+        // pieces are responsible for their movements and their drawing
         this.pieces.forEach(p => p.move())
         this.changeType()
+        this.addStat()
+        this.updateDOMStat()
         //this.drawBoard()
     }
 
@@ -63,8 +67,25 @@ class Board{
         return this.pieces.length > 0
     }
 
-    howManyPieces(){
+    howManyPieces(){ //return the total number of pieces
         return this.pieces.length
+    }
+
+    howManyOfType(type){ //return the number of pieces of a certain type
+        //1 is rock, 2 is paper, 3 is scissors
+        return this.pieces.filter(p => p.type === type).length
+    }
+
+    howManyRock(){
+        return this.howManyOfType(1)
+    }
+
+    howManyPaper(){
+        return this.howManyOfType(2)
+    }
+
+    howManyScissors(){
+        return this.howManyOfType(3)
     }
 
     doWeHaveWinner(){ //check if every piece is the same type
@@ -83,6 +104,12 @@ class Board{
     spawnPiece(id){ //spawn piece //1 is rock, 2 is paper, 3 is scissors
         let newP = new Piece(this.ctx, getRandCoord(COLS), getRandCoord(ROWS), id)
         this.pieces.push(newP)
+
+        if(this.stat === undefined){ //first piece put
+            this.initializeStat()
+        }else{
+            this.updateCurrStat()
+        }
     }
 
     addNPiecesOfEach(n){
@@ -99,5 +126,27 @@ class Board{
         )
         //https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/from
         //intersting stuff, .length is a data property, second argument is a function we call on each element
+    }
+
+
+    // Stat functions
+    initializeStat(){
+        this.stat = new Stat(this.howManyRock(), this.howManyPaper(), this.howManyScissors())
+    }
+
+    updateCurrStat(){
+        this.stat.updateCurrNRock(this.howManyRock())
+        this.stat.updateCurrNPaper(this.howManyPaper())
+        this.stat.updateCurrNScissors(this.howManyScissors())
+    }
+
+    addStat(){
+        this.stat.addNRock(this.howManyRock())
+        this.stat.addNPaper(this.howManyPaper())
+        this.stat.addNScissors(this.howManyScissors())
+    }
+
+    updateDOMStat(){
+        this.stat.updateDOMStat()
     }
 }
