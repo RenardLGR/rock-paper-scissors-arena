@@ -3,7 +3,7 @@
 }
 
 .hidden{
-    display: none;
+    display: none !important;
 }
 
 .game-title-h1{
@@ -70,6 +70,15 @@
     color: #cc8f1e;
 }
 
+.see-chart-span{
+    font-size: 0.7rem;
+}
+
+.see-chart-span:hover{
+    color: #cc8f1e;
+    cursor: pointer;
+}
+
 /* Chart Section */
 .chart-section{
     max-width: 1000px;
@@ -114,6 +123,41 @@
     margin-top: 5px;
 }
 
-/* .bar-scissors{
-    background-color: #d03328;
-} */
+/* Chart with lines - Section */
+.line-chart-section{
+    z-index: 10;
+    max-width: 800px;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -100%);
+}
+
+/* Line chart canvas */
+#myCanvas{
+    width: 100%;
+    max-width: 800px;
+}
+
+/* Close button */
+.close-button-span {
+    float: right;
+    /* display:inline-block; */
+    padding: 2px 4px 2px 6px;
+    background: #ccc;
+}
+
+.close-button-span:hover {
+    color:#fff;
+    cursor: pointer;
+}
+
+.copy-raw-data{
+    font-size: 0.7rem;
+}
+
+.copy-raw-data:hover{
+    color: #cc8f1e;
+    cursor: pointer;
+}

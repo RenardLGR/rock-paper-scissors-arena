@@ -1,7 +1,7 @@
 class Stat {
     constructor(nRock, nPaper, nScissors){
         //Keep track of the number of each pieces, each movements adds one
-        this.historyTotal
+        this.historyTotal //never used
         this.historyNRock = [nRock]
         this.historyNPaper = [nPaper]
         this.historyNScissors = [nScissors]
@@ -40,7 +40,6 @@ class Stat {
 
     addNPaper(newVal){
         this.historyNPaper.push(newVal)
-        this.temp++
     }
 
     addNScissors(newVal){

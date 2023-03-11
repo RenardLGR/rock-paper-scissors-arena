@@ -120,13 +120,25 @@ function resetGame() { //clears board, winner and winner p
 
 
 // DOM manipulation
+function switchBetweenChartAndWinner(){
+    let chartSection = document.querySelector('.chart-section')
+    chartSection.classList.toggle('hidden')
+    let winnerSection = document.querySelector(".winner-section")
+    winnerSection.classList.toggle('hidden')
+}
+
 function removeWinner(){
     winner = null
-    let p = document.querySelector(".winner-p")
-    p.innerHTML = ""
+    // let p = document.querySelector(".winner-p")
+    // p.innerHTML = ""
+    let winnerSection = document.querySelector(".winner-section")
+    winnerSection.classList.add('hidden')
+    let chartSection = document.querySelector('.chart-section')
+    chartSection.classList.remove('hidden')
 }
 
 function displayWinner(){
+    switchBetweenChartAndWinner()
     let p = document.querySelector(".winner-p")
     let win = whoIsTheWinner()
     let legend = generateLegend()

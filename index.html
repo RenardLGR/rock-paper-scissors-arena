@@ -9,6 +9,9 @@
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="./css/reset.css">
     <link rel="stylesheet" type="text/css" href="./css/style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
     <title>Rock Paper Scissors Arena</title>
 </head>
 
@@ -30,73 +33,82 @@
 
     <section class="winner-section hidden">
         <p class="winner-p"></p>
+        <span class="see-chart-span">See charts</span>
     </section>
 
-        <!-- Chart section -->
-        <section class="chart-section">
+    <!-- Chart section -->
+    <section class="chart-section">
 
-            <!-- Bar chart -->
-            <section class="all-bars-chart-section">
-    
-                <!-- Rock Bar -->
-                <section class="bar-chart-section bar-rock">
-                    <div class="bar-chart-legend-div bar-rock">
-                        <span class="bar-chart-legend-span bar-rock">Rock</span>
-                    </div>
-                    <div class="bar-chart-div bar-rock">
-                        <!-- This bar will shrink/grow -->
-                        <div class="bar-chart-bar bar-rock"></div>
-                    </div>
-                    <div class="bar-chart-total-div bar-rock">
-                        <span class="bar-chart-total-span bar-rock">0</span>
-                    </div>
-                </section>
-    
-                <!-- Paper Bar -->
-                <section class="bar-chart-section bar-paper">
-                    <div class="bar-chart-legend-div bar-paper">
-                        <span class="bar-chart-legend-span bar-paper">Paper</span>
-                    </div>
-                    <div class="bar-chart-div bar-paper">
-                        <!-- This bar will shrink/grow -->
-                        <div class="bar-chart-bar bar-paper"></div>
-                    </div>
-                    <div class="bar-chart-total-div bar-paper">
-                        <span class="bar-chart-total-span bar-paper">0</span>
-                    </div>
-                </section>
-    
-                <!-- Scissors Bar -->
-                <section class="bar-chart-section bar-scissors">
-                    <div class="bar-chart-legend-div bar-scissors">
-                        <span class="bar-chart-legend-span bar-scissors">Scissors</span>
-                    </div>
-                    <div class="bar-chart-div bar-scissors">
-                        <!-- This bar will shrink/grow -->
-                        <div class="bar-chart-bar bar-scissors"></div>
-                    </div>
-                    <div class="bar-chart-total-div bar-scissors">
-                        <span class="bar-chart-total-span bar-scissors">0</span>
-                    </div>
-                </section>
-            </section>
-    
-            <!-- All type total -->
-            <section class="all-type-total-section">
-                <div class="all-type-total-div">
-                    <span class="all-type-total-span">Total:</span>
+        <!-- Bar chart -->
+        <section class="all-bars-chart-section">
+
+            <!-- Rock Bar -->
+            <section class="bar-chart-section bar-rock">
+                <div class="bar-chart-legend-div bar-rock">
+                    <span class="bar-chart-legend-span bar-rock">Rock</span>
                 </div>
-                <div class="all-type-total-value-div">
-                    <span class="all-type-total-value-span">0</span>
+                <div class="bar-chart-div bar-rock">
+                    <!-- This bar will shrink/grow -->
+                    <div class="bar-chart-bar bar-rock"></div>
+                </div>
+                <div class="bar-chart-total-div bar-rock">
+                    <span class="bar-chart-total-span bar-rock">0</span>
+                </div>
+            </section>
+
+            <!-- Paper Bar -->
+            <section class="bar-chart-section bar-paper">
+                <div class="bar-chart-legend-div bar-paper">
+                    <span class="bar-chart-legend-span bar-paper">Paper</span>
+                </div>
+                <div class="bar-chart-div bar-paper">
+                    <!-- This bar will shrink/grow -->
+                    <div class="bar-chart-bar bar-paper"></div>
+                </div>
+                <div class="bar-chart-total-div bar-paper">
+                    <span class="bar-chart-total-span bar-paper">0</span>
+                </div>
+            </section>
+
+            <!-- Scissors Bar -->
+            <section class="bar-chart-section bar-scissors">
+                <div class="bar-chart-legend-div bar-scissors">
+                    <span class="bar-chart-legend-span bar-scissors">Scissors</span>
+                </div>
+                <div class="bar-chart-div bar-scissors">
+                    <!-- This bar will shrink/grow -->
+                    <div class="bar-chart-bar bar-scissors"></div>
+                </div>
+                <div class="bar-chart-total-div bar-scissors">
+                    <span class="bar-chart-total-span bar-scissors">0</span>
                 </div>
             </section>
         </section>
+
+        <!-- All type total -->
+        <section class="all-type-total-section">
+            <div class="all-type-total-div">
+                <span class="all-type-total-span">Total:</span>
+            </div>
+            <div class="all-type-total-value-div">
+                <span class="all-type-total-value-span">0</span>
+            </div>
+        </section>
+    </section>
+
+    <!-- Line chart canvas -->
+    <section class="line-chart-section hidden">
+        <span class="close-button-span">x</span>
+        <canvas id="myChart" style="width:100%;max-width:800px"></canvas>
+        <span class="copy-raw-data">Copy data to clipboard</span>
+    </section>
 
     <script type="text/javascript" src="./js/constants.js"></script>
     <script type="text/javascript" src="./js/Board.js"></script>
     <script type="text/javascript" src="./js/Piece.js"></script>
     <script type="text/javascript" src="./js/Stat.js"></script>
     <script type="text/javascript" src="./js/main.js"></script>
+    <script type="text/javascript" src="./js/chart.js"></script>
 </body>
 
 </html>

@@ -2,20 +2,30 @@ class Board{
     constructor(ctx){
         this.ctx = ctx
         this.pieces = [] //Array of Piece
-        this.stat
+        this.stat //Stat object
+        this.doUpdateStat = true
     }
 
     reset() {
         this.pieces = []
+        this.stat = null
+        this.doUpdateStat = true
     }
 
     move(){ //make a movement, check if pieces need to change type, update stat
         // pieces are responsible for their movements and their drawing
         this.pieces.forEach(p => p.move())
         this.changeType()
-        this.addStat()
-        this.updateDOMStat()
-        //this.drawBoard()
+        if(this.doUpdateStat){
+            //no need to add stats if we have a winner
+            this.addStat()
+            this.updateDOMStat()
+        }
+        if(this.doWeHaveWinner() && this.doUpdateStat){ //if we have a winner, we do a last update and stop updating
+            this.addStat()
+            this.updateDOMStat()
+            this.doUpdateStat = false
+        }
     }
 
     drawBoard(){ //draw sprites
@@ -105,10 +115,12 @@ class Board{
         let newP = new Piece(this.ctx, getRandCoord(COLS), getRandCoord(ROWS), id)
         this.pieces.push(newP)
 
-        if(this.stat === undefined){ //first piece put
+        if(this.stat == undefined){ //first piece put
             this.initializeStat()
+            this.doUpdateStat = true
         }else{
             this.updateCurrStat()
+            this.doUpdateStat = true
         }
     }
 
@@ -118,14 +130,6 @@ class Board{
                 this.spawnPiece(j)
             }
         }
-    }
-
-    getEmptyGrid() { //useless for now
-        return Array.from(
-            { length: ROWS }, () => Array(COLS).fill(0)
-        )
-        //https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/from
-        //intersting stuff, .length is a data property, second argument is a function we call on each element
     }
 
 
@@ -148,5 +152,26 @@ class Board{
 
     updateDOMStat(){
         this.stat.updateDOMStat()
+    }
+
+    getStatRaw(){
+        return this.stat
+    }
+
+    getStatLight(){
+        //We get the stat but only one out of 60 (so approx one evry second). We include the first and last iteration
+        //We return a readable object
+
+        let statRock = this.stat.getHistoryNRock().filter((el, idx, arr) => {
+            return (idx%60===0 || idx===arr.length-1)
+        })
+        let statPaper = this.stat.getHistoryNPaper().filter((el, idx, arr) => {
+            return (idx%60===0 || idx===arr.length-1)
+        })
+        let statScissors = this.stat.getHistoryNScissors().filter((el, idx, arr) => {
+            return (idx%60===0 || idx===arr.length-1)
+        })
+        let time = [...Array(statRock.length).keys()]
+        return {statRock, statPaper, statScissors, time}
     }
 }
