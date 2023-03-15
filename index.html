@@ -16,11 +16,12 @@
 </head>
 
 <body>
-    <h1 class="game-title-h1">Rock Paper Scissors Arena</h1>
-    <section class="wrapper-section">
-        <div class="board-div">
+    <h1 class="game-title-h1 dark-theme">Rock Paper Scissors Arena</h1>
+    <section class="wrapper-section dark-theme">
+        <div class="board-div dark-theme">
             <canvas id="board"></canvas>
         </div>
+        <!-- Settings -->
         <div class="settings-div">
             <button class="spawn-rock-button settings-buttons"> +1 Rock</button>
             <button class="spawn-paper-button settings-buttons"> +1 Paper</button>
@@ -28,6 +29,15 @@
             <button class="spawn-10-each-button settings-buttons"> +10 of each</button>
             <button onclick="play()" class="play-button settings-buttons">Start</button>
             <button class="reset-button settings-buttons">Reset</button>
+        </div>
+        <!-- Theme switch -->
+        <div class="theme-switch-div">
+            <input type="checkbox" class="checkbox dark-theme" id="theme-switch-checkbox">
+            <label for="theme-switch-checkbox" class="label">
+            <img src="./img/sun.svg" alt="sun-logo" class="sun-svg">
+            <img src="./img/moon.svg" alt="moon-logo" class="moon-svg">
+            <div class='ball-div'>
+          </label>
         </div>
     </section>
 
@@ -103,6 +113,7 @@
         <span class="copy-raw-data">Copy data to clipboard</span>
     </section>
 
+    <script type="text/javascript" src="./js/theme.js"></script>
     <script type="text/javascript" src="./js/constants.js"></script>
     <script type="text/javascript" src="./js/Board.js"></script>
     <script type="text/javascript" src="./js/Piece.js"></script>

@@ -1,8 +1,9 @@
 class Piece {
-    constructor(ctx, x, y, type) {
+    constructor(ctx, x, y, type, isDarkTheme) {
         this.ctx = ctx
         this.color = 'purple'
         this.type = type //1 is rock, 2 is paper, 3 is scissors
+        this.isDarkTheme = isDarkTheme
         //Starting position, origin is top left corner, increasing x will go left, increasing y will go bottom
         this.imgsrc
         this.x = x
@@ -103,6 +104,18 @@ class Piece {
         return newAngle;
     }
 
+    turnToLightTheme(){
+        this.isDarkTheme = false
+        this.attributeImgsrc()
+        this.draw()
+    }
+
+    turnToDarkTheme(){
+        this.isDarkTheme = true
+        this.attributeImgsrc()
+        this.draw()
+    }
+
     attributeColor() { //changed the default color to a color corresponding to its id
         //As we moved to img as sprites, obsolete
         switch (this.type) {
@@ -126,15 +139,15 @@ class Piece {
     attributeImgsrc() { //changed the default src to a src corresponding to its id
         switch (this.type) {
             case 1:
-                this.imgsrc = "./img/rock.svg"
+                this.imgsrc = this.isDarkTheme ? "./img/rockwhite.svg" : "./img/rock.svg"
                 break;
 
             case 2:
-                this.imgsrc = "./img/paper.svg"
+                this.imgsrc = this.isDarkTheme ? "./img/paperwhite.svg" : "./img/paper.svg"
                 break;
 
             case 3:
-                this.imgsrc = "./img/scissors.svg"
+                this.imgsrc = this.isDarkTheme ? "./img/scissorswhite.svg" : "./img/scissors.svg"
                 break;
 
             default:

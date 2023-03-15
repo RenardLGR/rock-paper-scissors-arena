@@ -4,6 +4,7 @@ class Board{
         this.pieces = [] //Array of Piece
         this.stat //Stat object
         this.doUpdateStat = true
+        this.isDarkTheme = true
     }
 
     reset() {
@@ -73,6 +74,16 @@ class Board{
         return res
     }
 
+    turnToLightTheme(){
+        this.isDarkTheme = false
+        this.pieces.forEach(p => p.turnToLightTheme())
+    }
+
+    turnToDarkTheme(){
+        this.isDarkTheme = true
+        this.pieces.forEach(p => p.turnToDarkTheme())
+    }
+
     hasPieces(){ //return a Boolean if the board has or not any pieces
         return this.pieces.length > 0
     }
@@ -112,7 +123,7 @@ class Board{
     }
 
     spawnPiece(id){ //spawn piece //1 is rock, 2 is paper, 3 is scissors
-        let newP = new Piece(this.ctx, getRandCoord(COLS), getRandCoord(ROWS), id)
+        let newP = new Piece(this.ctx, getRandCoord(COLS), getRandCoord(ROWS), id, this.isDarkTheme)
         this.pieces.push(newP)
 
         if(this.stat == undefined){ //first piece put

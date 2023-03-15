@@ -1,37 +1,54 @@
-*{
+/* Global */
+* {
     font-family: 'Press Start 2P', cursive !important;
+    /* Light/Dark switch */
+    transition: background 0.2s linear;
 }
 
-.hidden{
+body {
+    background-color: rgb(32, 33, 36);
+    color: white;
+    /* Light/Dark switch */
+    /* transition: background 0.2s linear; */
+}
+
+.hidden {
     display: none !important;
 }
 
-.game-title-h1{
+
+/* Styles */
+.game-title-h1 {
     margin: 6vh auto;
     text-align: center;
     font-size: 3rem;
 }
 
-.wrapper-section{
+.wrapper-section {
     margin: 6vh auto;
     max-width: 1400px;
     display: flex;
 }
 
-#board {
-    border: 2px solid black;
+.board-div {
+    background-color: inherit;
 }
 
+#board {
+    border: 2px solid black;
+    background-color: inherit;
+}
 
-.settings-div{
+.settings-div {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
+    background-color: inherit;
 }
 
-.settings-buttons{
+.settings-buttons {
     margin-top: 10%;
     height: 60px;
     width: 60%;
@@ -41,11 +58,11 @@
     cursor: pointer;
 }
 
-.spawn-rock-button{
+.spawn-rock-button {
     margin-top: 2%;
 }
 
-.spawn-10-each-button{
+.spawn-10-each-button {
     margin-top: 25%;
     background-color: #cc8f1e;
 }
@@ -55,76 +72,121 @@
     background-color: #4caf50;
 }
 
-.reset-button{
+.reset-button {
     background-color: #d03328;
 }
 
+/* Theme switch */
+.theme-switch-div {
+    background-color: inherit;
+}
+
+.checkbox {
+    opacity: 0;
+    position: absolute;
+}
+
+.label {
+    width: 44px;
+    height: 18px;
+    background-color: #111;
+    display: flex;
+    border-radius: 50px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3px;
+    position: relative;
+    transform: scale(1.5);
+}
+
+.ball-div {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    border-radius: 50%;
+    transition: transform 0.2s linear;
+}
+
+/*  target the elemenent after the label*/
+.checkbox:checked+.label .ball-div {
+    transform: translateX(24px);
+}
+
+
+.sun-svg,
+.moon-svg {
+    background-color: #111;
+}
+
 /* Winner section */
-.winner-section{
+.winner-section {
     font-size: 2.5rem;
     font-family: 'Press Start 2P', cursive;
     text-align: center;
 }
 
-.winner-span{
+.winner-span {
     color: #cc8f1e;
 }
 
-.see-chart-span{
+.see-chart-span {
     font-size: 0.7rem;
 }
 
-.see-chart-span:hover{
+.see-chart-span:hover {
     color: #cc8f1e;
     cursor: pointer;
 }
 
 /* Chart Section */
-.chart-section{
+.chart-section {
     max-width: 1000px;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
 }
 
-.all-bars-chart-section{
+.all-bars-chart-section {
     flex: 5;
 }
 
-.all-type-total-section{
+.all-type-total-section {
     flex: 1;
     text-align: center;
 }
 
-.all-bars-chart-section{
+.all-bars-chart-section {
     display: flex;
     flex-direction: column;
 }
 
 /* Title + Bar + Piece total - Section */
-.bar-chart-section{
+.bar-chart-section {
     margin-top: 3px;
     display: flex;
     flex-direction: row;
 }
 
-.bar-chart-section > *{
+.bar-chart-section>* {
     flex: 1;
 }
 
-.bar-chart-bar{
+.bar-chart-bar {
     height: 20px;
     width: 1px;
     background-color: #d03328;
 }
 
 /* Total - Section */
-.all-type-total-value-div{
+.all-type-total-value-div {
     margin-top: 5px;
 }
 
 /* Chart with lines - Section */
-.line-chart-section{
+.line-chart-section {
     z-index: 10;
     max-width: 800px;
     margin: 0 auto;
@@ -135,7 +197,7 @@
 }
 
 /* Line chart canvas */
-#myCanvas{
+#myCanvas {
     width: 100%;
     max-width: 800px;
 }
@@ -149,15 +211,15 @@
 }
 
 .close-button-span:hover {
-    color:#fff;
+    color: #cc8f1e;
     cursor: pointer;
 }
 
-.copy-raw-data{
+.copy-raw-data {
     font-size: 0.7rem;
 }
 
-.copy-raw-data:hover{
+.copy-raw-data:hover {
     color: #cc8f1e;
     cursor: pointer;
 }

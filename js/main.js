@@ -140,6 +140,7 @@ function removeWinner(){
 function displayWinner(){
     switchBetweenChartAndWinner()
     let p = document.querySelector(".winner-p")
+    // p.classList.add(board.isDarkTheme ? 'dark-theme' : 'light-theme')
     let win = whoIsTheWinner()
     let legend = generateLegend()
     p.innerHTML = `<span class="winner-span">${win}</span> wins. <span class="winner-span">${legend}</span>.`
