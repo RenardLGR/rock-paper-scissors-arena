@@ -99,6 +99,10 @@ body {
     transform: scale(1.5);
 }
 
+.label:hover{
+    cursor: pointer;
+}
+
 .ball-div {
     width: 20px;
     height: 20px;
