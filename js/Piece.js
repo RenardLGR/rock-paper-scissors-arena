@@ -29,16 +29,16 @@ class Piece {
 
     move() {
         if (this.x >= this.maxX) { //check for wall collision
-            this.direction = this.reflect(this.direction, 'right')
+            this.direction = this.reflectSimple(this.direction, 'right')
         }
         if (this.y >= this.maxY) { //check for wall collision
-            this.direction = this.reflect(this.direction, 'bottom')
+            this.direction = this.reflectSimple(this.direction, 'bottom')
         }
         if (this.x <= 0) { //check for wall collision
-            this.direction = this.reflect(this.direction, 'left')
+            this.direction = this.reflectSimple(this.direction, 'left')
         }
         if (this.y <= 0) { //check for wall collision
-            this.direction = this.reflect(this.direction, 'top')
+            this.direction = this.reflectSimple(this.direction, 'top')
         }
         this.x += Math.cos(this.direction) / 8
         this.y += Math.sin(this.direction) / 8
@@ -61,8 +61,10 @@ class Piece {
     }
 
     reflect(angle, wall) {
+        //Deprecated, kept if the container shape is no more a square
         //This function returns a new direction when a collision on a wall occurs
 
+        //http://www.sunshine2k.de/articles/coding/vectorreflection/vectorreflection.html
 
         // Convert angle to unit vector
         const vx = Math.cos(angle);
@@ -102,6 +104,48 @@ class Piece {
         const newAngle = Math.atan2(ry, rx);
 
         return newAngle;
+    }
+
+    reflectSimple(angle, wall){
+        //This function returns a new direction when a collision on a wall occurs
+        //As we are working with right walls (meaning if a wall has normal value in x, the normal value in y is 0), we can simplify the function above
+        //∀ nx=/=0 <=> ny=0
+        //∀ nx=/=0 <=> nx=0
+
+        // https://stackoverflow.com/questions/283406/what-is-the-difference-between-atan-and-atan2-in-c
+
+        //In fact, a hit on left or right wall will just inverse its cosine value and a hit on top or bottom wall will just inverse its sine value
+        //To get back an angle we would use atan2(y, x) with x,y which are the projection of a vector with length v and angle θ on the y- and x-axis, i.e.
+        // y = v * sin(θ)
+        // x = v * cos(θ)
+        //As every elements move with the same speed, we can consider v=1 and get rid of it
+
+        // Convert angle to unit vector
+        const vx = Math.cos(angle);
+        const vy = Math.sin(angle);
+
+        // atan(tanθ) ≡ θ mod π with -π/2 <= θ <= π/2
+        // but atan2(vy, vx) gives back -π <= θ <= π
+        let newAngle
+        //Calculate new angle with sine or cosine flipped
+        switch (wall) {
+            case 'left':
+                newAngle = Math.atan2(vy, -vx)
+                break;
+            case 'right':
+                newAngle = Math.atan2(vy, -vx)
+                break;
+            case 'top':
+                newAngle = Math.atan2(-vy, vx)
+                break;
+            case 'bottom':
+                newAngle = Math.atan2(-vy, vx)
+                break;
+            default:
+                throw new Error(`Invalid wall: ${wall}`);
+        }
+
+        return newAngle
     }
 
     turnToLightTheme(){
